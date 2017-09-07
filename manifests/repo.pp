@@ -7,7 +7,7 @@
 class elastic_stack::repo(
   Integer $version=5,
   Integer $priority=10,
-  String $proxy=undef,
+  String $proxy=absent,
 )
 
 {
