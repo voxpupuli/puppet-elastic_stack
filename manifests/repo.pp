@@ -8,7 +8,7 @@
 # @param version The (major) version of the Elastic Stack for which to configure the repo
 # @param priority A numeric priority for the repo, passed to the package management system
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
-class repo(
+class elastic_stack::repo(
   Integer $version=5,
   Integer $priority=10,
   String $proxy='absent',

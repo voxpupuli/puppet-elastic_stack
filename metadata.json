@@ -1,6 +1,6 @@
 {
   "name": "elastic-elastic_stack",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "author": "toby@jarpy.net",
   "summary": "Helpers for installing and configuring components of the Elastic Stack.",
   "license": "Apache-2.0",
