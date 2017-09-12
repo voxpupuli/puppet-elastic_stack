@@ -36,6 +36,14 @@
     {
       "name": "puppet",
       "version_requirement": ">= 4.7.0 < 6.0.0"
+    },
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 2.0.0 < 5.0.0"
+    },
+    {
+      "name": "puppet/yum",
+      "version_requirement": ">= 0.9.6 < 3.0.0"
     }
   ],
   "pdk-version": "1.0.1",
