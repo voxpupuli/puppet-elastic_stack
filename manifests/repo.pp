@@ -59,33 +59,34 @@ class repo(
       }
     }
     'Suse': {
+      # Older versions of SLES do not ship with rpmkeys
       if $::operatingsystem == 'SLES' and versioncmp($::operatingsystemmajrelease, '11') <= 0 {
-        # Older versions of SLES do not ship with rpmkeys
         $_import_cmd = "rpm --import ${::elasticsearch::repo_key_source}"
-        } else {
-          $_import_cmd = "rpmkeys --import ${::elasticsearch::repo_key_source}"
-        }
+      }
+      else {
+        $_import_cmd = "rpmkeys --import ${::elasticsearch::repo_key_source}"
+      }
 
-        exec { 'elasticsearch_suse_import_gpg':
-          command => $_import_cmd,
-          unless  =>
-          "test $(rpm -qa gpg-pubkey | grep -i 'D88E42B4' | wc -l) -eq 1",
-          notify  => Zypprepo['elasticsearch'],
-        }
+      exec { 'elasticsearch_suse_import_gpg':
+        command => $_import_cmd,
+        unless  =>
+        "test $(rpm -qa gpg-pubkey | grep -i 'D88E42B4' | wc -l) -eq 1",
+        notify  => Zypprepo['elasticsearch'],
+      }
 
-        zypprepo { 'elastic':
-          baseurl     => "${base_url}/yum",
-          enabled     => 1,
-          autorefresh => 1,
-          name        => 'elastic',
-          gpgcheck    => 1,
-          gpgkey      => $key_source,
-          type        => 'yum',
-        }
-        ~> exec { 'elasticsearch_zypper_refresh_elastic':
-          command     => 'zypper refresh elastic',
-          refreshonly => true,
-        }
+      zypprepo { 'elastic':
+        baseurl     => "${base_url}/yum",
+        enabled     => 1,
+        autorefresh => 1,
+        name        => 'elastic',
+        gpgcheck    => 1,
+        gpgkey      => $key_source,
+        type        => 'yum',
+      }
+      ~> exec { 'elasticsearch_zypper_refresh_elastic':
+        command     => 'zypper refresh elastic',
+        refreshonly => true,
+      }
     }
     default: {
       fail("\"${module_name}\" provides no repository information for OSfamily \"${::osfamily}\"")
