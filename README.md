@@ -1,7 +1,7 @@
 # elastic_stack
 
-This work-in-progress module contains shared code for various Elastic
-modules, like elastic-elasticsearch, elastic-logstash etc.
+This module contains shared code for various Elastic modules, like
+elastic-elasticsearch, elastic-logstash etc.
 
 # Setting up the Elastic package repository
 This module can configure package repositories for Elastic Stack components.
@@ -16,5 +16,14 @@ You may wish to specify a major version, since each has its own repository:
 
 ``` puppet
 class { 'elastic_stack::repo':
-  version => 6,
+  version => 5,
 }
+```
+
+To access prerelease versions, such as release candidates, set `prerelease` to `true`.
+``` puppet
+class { 'elastic_stack::repo':
+  version    => 6,
+  prerelease => true,
+}
+```

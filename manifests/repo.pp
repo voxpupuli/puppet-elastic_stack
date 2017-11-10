@@ -8,14 +8,22 @@
 # @param version The (major) version of the Elastic Stack for which to configure the repo
 # @param priority A numeric priority for the repo, passed to the package management system
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
+# @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 class elastic_stack::repo(
   Integer $version=5,
   Integer $priority=10,
   String $proxy='absent',
+  Boolean $prerelease=false,
 )
 
 {
-  $base_url = "https://artifacts.elastic.co/packages/${version}.x"
+  if $prerelease {
+    $url_suffix = '-prerelease'
+  }
+  else {
+    $url_suffix = ''
+  }
+  $base_url = "https://artifacts.elastic.co/packages/${version}.x${url_suffix}"
   $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
   $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
