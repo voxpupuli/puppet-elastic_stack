@@ -24,18 +24,22 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8"
+        "7",
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
+        "6.0",
         "7.0"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
+        "14.04",
         "16.04"
       ]
     }
@@ -43,7 +47,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 6.0.0"
+      "version_requirement": ">= 4.6.1 < 6.0.0"
     }
   ],
   "pdk-version": "1.0.1",
