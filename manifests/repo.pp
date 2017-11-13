@@ -64,6 +64,8 @@ class elastic_stack::repo(
         command     => 'yum clean metadata expire-cache --disablerepo="*" --enablerepo="elasticsearch"',
         refreshonly => true,
         returns     => [0, 1],
+        path        => [ '/bin', '/usr/bin', '/usr/local/bin' ],
+        cwd         => '/',
       }
     }
     'Suse': {
@@ -77,9 +79,10 @@ class elastic_stack::repo(
 
       exec { 'elasticsearch_suse_import_gpg':
         command => $_import_cmd,
-        unless  =>
-        "test $(rpm -qa gpg-pubkey | grep -i 'D88E42B4' | wc -l) -eq 1",
+        unless  => "test $(rpm -qa gpg-pubkey | grep -i 'D88E42B4' | wc -l) -eq 1",
         notify  => Zypprepo['elasticsearch'],
+        path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
+        cwd     => '/',
       }
 
       zypprepo { 'elastic':
@@ -94,15 +97,12 @@ class elastic_stack::repo(
       ~> exec { 'elasticsearch_zypper_refresh_elastic':
         command     => 'zypper refresh elastic',
         refreshonly => true,
+        path        => [ '/bin', '/usr/bin', '/usr/local/bin' ],
+        cwd         => '/',
       }
     }
     default: {
       fail("\"${module_name}\" provides no repository information for OSfamily \"${::osfamily}\"")
     }
-  }
-
-  Exec {
-    path => [ '/bin', '/usr/bin', '/usr/local/bin' ],
-    cwd  => '/',
   }
 }
