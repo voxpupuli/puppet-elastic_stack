@@ -10,7 +10,7 @@
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
 # @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 class elastic_stack::repo(
-  Integer $version=5,
+  Integer $version=6,
   Integer $priority=10,
   String $proxy='absent',
   Boolean $prerelease=false,
