@@ -13,7 +13,7 @@ before_install:
   - bundle -v
 
 script:
-  - 'bundle exec rake $CHECK'
+  - 'bundle exec rake syntax validate lint spec'
 
 matrix:
   fast_finish: true
