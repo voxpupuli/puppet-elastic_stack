@@ -100,3 +100,6 @@ Style/IfUnlessModifier:
   Enabled: false
 Style/SymbolProc:
   Enabled: false
+Naming/FileName:
+ Exclude:
+ - Vagrantfile

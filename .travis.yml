@@ -13,7 +13,7 @@ before_install:
   - bundle -v
 
 script:
-  - 'bundle exec rake syntax validate lint spec'
+  - 'bundle exec rake rubocop syntax validate lint spec'
 
 matrix:
   fast_finish: true
