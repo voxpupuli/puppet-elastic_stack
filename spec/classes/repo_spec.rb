@@ -59,9 +59,6 @@ describe 'elastic_stack::repo', type: 'class' do
             is_expected.to contain_zypprepo('elastic')
               .with(baseurl: 'https://artifacts.elastic.co/packages/10.x/yum')
           }
-          it {
-            is_expected.to contain_exec('elastic_zypper_refresh_elastic')
-          }
         end
       end
 
@@ -72,34 +69,11 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'Debian'
-          it {
-            is_expected.to contain_apt__source('elastic')
-              .with(
-                location: 'https://artifacts.elastic.co/packages/6.x/apt',
-                pin: 99,
-              )
-          }
+          it { is_expected.to contain_apt__source('elastic').with(pin: 99) }
         when 'RedHat'
-          it {
-            is_expected.to contain_yumrepo('elastic')
-              .with(
-                baseurl: 'https://artifacts.elastic.co/packages/6.x/yum',
-                priority: 99,
-              )
-          }
+          it { is_expected.to contain_yumrepo('elastic').with(priority: 99) }
         when 'Suse'
-          it {
-            is_expected.to contain_exec('elastic_suse_import_gpg')
-              .with(command: 'rpmkeys --import https://artifacts.elastic.co/GPG-KEY-elasticsearch')
-          }
-          it {
-            is_expected.to contain_zypprepo('elastic')
-              .with(
-                baseurl: 'https://artifacts.elastic.co/packages/6.x/yum',
-                priority: 99,
-              )
-          }
-          it { is_expected.to contain_exec('elastic_zypper_refresh_elastic') }
+          it { is_expected.to contain_zypprepo('elastic').with(priority: 99) }
         end
       end
 
@@ -139,7 +113,6 @@ describe 'elastic_stack::repo', type: 'class' do
             is_expected.to contain_zypprepo('elastic')
               .with(baseurl: 'https://artifacts.elastic.co/packages/6.x-prerelease/yum')
           }
-          it { is_expected.to contain_exec('elastic_zypper_refresh_elastic') }
         end
       end
     end
