@@ -1,3 +1,7 @@
+## Release 6.0.1
+
+- Remove aggressive ordering causing all packages to come after apt::update.
+
 ## Release 6.0.0
 
 Version number increase to indicate that this module is considered of reasonable
