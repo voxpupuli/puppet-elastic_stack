@@ -31,7 +31,6 @@ class elastic_stack::repo(
   case $::osfamily {
     'Debian': {
       include apt
-      Class['apt::update'] -> Package <| |>
 
       apt::source { 'elastic':
         ensure   => 'present',
