@@ -14,6 +14,18 @@ def yum_url(version: '6.x')
   url('yum', version)
 end
 
+def declare_yum
+  contain_yumrepo('elastic')
+end
+
+def declare_apt
+  contain_apt__source('elastic')
+end
+
+def declare_zypper
+  contain_zypprepo('elastic')
+end
+
 describe 'elastic_stack::repo', type: 'class' do
   default_params = {}
   on_supported_os(facterversion: '2.4').each do |os, facts|
@@ -23,11 +35,11 @@ describe 'elastic_stack::repo', type: 'class' do
       describe 'distro-specific package repositories' do
         case facts[:os]['family']
         when 'Debian'
-          it { is_expected.to contain_apt__source('elastic').with(location: apt_url) }
+          it { is_expected.to declare_apt.with(location: apt_url) }
         when 'RedHat'
-          it { is_expected.to contain_yumrepo('elastic').with(baseurl: yum_url) }
+          it { is_expected.to declare_yum.with(baseurl: yum_url) }
         when 'Suse'
-          it { is_expected.to contain_zypprepo('elastic').with(baseurl: yum_url) }
+          it { is_expected.to declare_zypper.with(baseurl: yum_url) }
           it { is_expected.to contain_exec('elastic_suse_import_gpg').with(command: rpm_key_cmd) }
           it {
             is_expected.to contain_exec('elastic_zypper_refresh_elastic')
@@ -43,11 +55,11 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'Debian'
-          it { is_expected.to contain_apt__source('elastic').with(location: apt_url(version: '5.x')) }
+          it { is_expected.to declare_apt.with(location: apt_url(version: '5.x')) }
         when 'RedHat'
-          it { is_expected.to contain_yumrepo('elastic').with(baseurl: yum_url(version: '5.x')) }
+          it { is_expected.to declare_yum.with(baseurl: yum_url(version: '5.x')) }
         when 'Suse'
-          it { is_expected.to contain_zypprepo('elastic').with(baseurl: yum_url(version: '5.x')) }
+          it { is_expected.to declare_zypper.with(baseurl: yum_url(version: '5.x')) }
         end
       end
 
@@ -58,11 +70,11 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'Debian'
-          it { is_expected.to contain_apt__source('elastic').with(pin: 99) }
+          it { is_expected.to declare_apt.with(pin: 99) }
         when 'RedHat'
-          it { is_expected.to contain_yumrepo('elastic').with(priority: 99) }
+          it { is_expected.to declare_yum.with(priority: 99) }
         when 'Suse'
-          it { is_expected.to contain_zypprepo('elastic').with(priority: 99) }
+          it { is_expected.to declare_zypper.with(priority: 99) }
         end
       end
 
@@ -73,7 +85,7 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'RedHat'
-          it { is_expected.to contain_yumrepo('elastic').with(proxy: 'http://proxy.com:8080') }
+          it { is_expected.to declare_yum.with(proxy: 'http://proxy.com:8080') }
         end
       end
 
@@ -84,11 +96,11 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'Debian'
-          it { is_expected.to contain_apt__source('elastic').with(location: apt_url(version: '6.x-prerelease')) }
+          it { is_expected.to declare_apt.with(location: apt_url(version: '6.x-prerelease')) }
         when 'RedHat'
-          it { is_expected.to contain_yumrepo('elastic').with(baseurl: yum_url(version: '6.x-prerelease')) }
+          it { is_expected.to declare_yum.with(baseurl: yum_url(version: '6.x-prerelease')) }
         when 'Suse'
-          it { is_expected.to contain_zypprepo('elastic').with(baseurl: yum_url(version: '6.x-prerelease')) }
+          it { is_expected.to declare_zypper.with(baseurl: yum_url(version: '6.x-prerelease')) }
         end
       end
     end
