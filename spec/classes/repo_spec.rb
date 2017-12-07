@@ -31,7 +31,10 @@ describe 'elastic_stack::repo', type: 'class' do
                 baseurl: 'https://artifacts.elastic.co/packages/6.x/yum',
               )
           }
-          it { is_expected.to contain_exec('elastics_zypper_refresh_elastic') }
+          it {
+            is_expected.to contain_exec('elastic_zypper_refresh_elastic')
+              .with(command: 'zypper refresh elastic')
+          }
         end
       end
 
@@ -69,7 +72,7 @@ describe 'elastic_stack::repo', type: 'class' do
               )
           }
           it {
-            is_expected.to contain_exec('elastics_zypper_refresh_elastic')
+            is_expected.to contain_exec('elastic_zypper_refresh_elastic')
           }
         end
       end
@@ -110,7 +113,7 @@ describe 'elastic_stack::repo', type: 'class' do
                 priority: 99,
               )
           }
-          it { is_expected.to contain_exec('elastics_zypper_refresh_elastic') }
+          it { is_expected.to contain_exec('elastic_zypper_refresh_elastic') }
         end
       end
 
@@ -163,7 +166,7 @@ describe 'elastic_stack::repo', type: 'class' do
                 baseurl: 'https://artifacts.elastic.co/packages/6.x-prerelease/yum',
               )
           }
-          it { is_expected.to contain_exec('elastics_zypper_refresh_elastic') }
+          it { is_expected.to contain_exec('elastic_zypper_refresh_elastic') }
         end
       end
     end
