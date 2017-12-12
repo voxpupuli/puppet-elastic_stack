@@ -66,6 +66,9 @@ Style/CollectionMethods:
   Enabled: true
 Style/MethodCalledOnDoEndBlock:
   Enabled: true
+Style/MixinUsage:
+ Exclude:
+ - spec/spec_helper.rb
 Style/StringMethods:
   Enabled: true
 Metrics/AbcSize:
