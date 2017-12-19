@@ -11,7 +11,7 @@
 # @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 class elastic_stack::repo(
   Integer $version=6,
-  Integer $priority=10,
+  Optional[Integer] $priority=undef,
   String $proxy='absent',
   Boolean $prerelease=false,
 )
