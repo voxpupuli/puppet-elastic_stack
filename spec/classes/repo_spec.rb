@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 def url(format, version)
-  "https://artifacts.elastic.co/packages/#{version}/#{format}"
+  case version
+  when %r{^2}
+    repo_type = (format == 'yum') ? 'centos' : 'debian'
+    "https://packages.elastic.co/elasticsearch/#{version}/#{repo_type}"
+  else
+    "https://artifacts.elastic.co/packages/#{version}/#{format}"
+  end
 end
 
 def declare_apt(version: '6.x', **params)
@@ -36,6 +42,19 @@ describe 'elastic_stack::repo', type: 'class' do
         it { is_expected.to declare_zypper }
         it { is_expected.to contain_exec('elastic_suse_import_gpg').with(command: rpm_key_cmd) }
         it { is_expected.to contain_exec('elastic_zypper_refresh_elastic').with(command: 'zypper refresh elastic') }
+      end
+
+      context 'with "version => 2"' do
+        let(:params) { default_params.merge(version: 2) }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(version: '2.x') }
+        when 'RedHat'
+          it { is_expected.to declare_yum(version: '2.x') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(version: '2.x') }
+        end
       end
 
       context 'with "version => 5"' do
