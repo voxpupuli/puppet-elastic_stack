@@ -23,7 +23,30 @@ class elastic_stack::repo(
   else {
     $url_suffix = ''
   }
-  $base_url = "https://artifacts.elastic.co/packages/${version}.x${url_suffix}"
+
+  if $version > 2 {
+    $_repo_url = 'https://artifacts.elastic.co/packages'
+    case $facts['os']['family'] {
+      'Debian': {
+        $_repo_path = 'apt'
+      }
+      default: {
+        $_repo_path = 'yum'
+      }
+    }
+  } else {
+    $_repo_url = 'https://packages.elastic.co/elasticsearch'
+    case $facts['os']['family'] {
+      'Debian': {
+        $_repo_path = 'debian'
+      }
+      default: {
+        $_repo_path = 'centos'
+      }
+    }
+  }
+
+  $base_url = "${_repo_url}/${version}.x${url_suffix}/${_repo_path}"
   $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
   $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
@@ -35,7 +58,7 @@ class elastic_stack::repo(
       apt::source { 'elastic':
         ensure   => 'present',
         comment  => $description,
-        location => "${base_url}/apt",
+        location => $base_url,
         release  => 'stable',
         repos    => 'main',
         key      => {
@@ -52,7 +75,7 @@ class elastic_stack::repo(
     'RedHat', 'Linux': {
       yumrepo { 'elastic':
         descr    => $description,
-        baseurl  => "${base_url}/yum",
+        baseurl  => $base_url,
         gpgcheck => 1,
         gpgkey   => $key_source,
         enabled  => 1,
@@ -85,7 +108,7 @@ class elastic_stack::repo(
       }
 
       zypprepo { 'elastic':
-        baseurl     => "${base_url}/yum",
+        baseurl     => $base_url,
         enabled     => 1,
         autorefresh => 1,
         name        => 'elastic',
