@@ -5,22 +5,26 @@
 # @example
 #   include elastic_stack::repo
 #
-# @param version The (major) version of the Elastic Stack for which to configure the repo
+# @param oss Whether to use the purely open source (i.e., bundled without X-Pack) repository
+# @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 # @param priority A numeric priority for the repo, passed to the package management system
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
-# @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
+# @param version The (major) version of the Elastic Stack for which to configure the repo
 class elastic_stack::repo(
-  Integer $version=6,
-  Optional[Integer] $priority=undef,
-  String $proxy='absent',
-  Boolean $prerelease=false,
+  Boolean           $oss        = false,
+  Boolean           $prerelease = false,
+  Optional[Integer] $priority   = undef,
+  String            $proxy      = 'absent',
+  Integer           $version    = 6,
 )
 
 {
   if $prerelease {
     $url_suffix = '-prerelease'
   }
-  else {
+  elsif $oss {
+    $url_suffix = '-oss'
+  } else {
     $url_suffix = ''
   }
 

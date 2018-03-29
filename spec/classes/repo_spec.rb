@@ -96,6 +96,19 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
+      context 'with "oss => true"' do
+        let(:params) { default_params.merge(oss: true) }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(version: '6.x-oss') }
+        when 'RedHat'
+          it { is_expected.to declare_yum(version: '6.x-oss') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(version: '6.x-oss') }
+        end
+      end
+
       context 'with proxy parameter' do
         let(:params) { default_params.merge(proxy: 'http://proxy.com:8080') }
 
