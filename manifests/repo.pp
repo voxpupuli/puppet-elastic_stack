@@ -20,12 +20,15 @@ class elastic_stack::repo(
 
 {
   if $prerelease {
-    $url_suffix = '-prerelease'
-  }
-  elsif $oss {
-    $url_suffix = '-oss'
+    $version_suffix = '.x-prerelease'
   } else {
-    $url_suffix = ''
+    $version_suffix = '.x'
+  }
+
+  if $oss {
+    $version_prefix = 'oss-'
+  } else {
+    $version_prefix = ''
   }
 
   if $version > 2 {
@@ -50,7 +53,7 @@ class elastic_stack::repo(
     }
   }
 
-  $base_url = "${_repo_url}/${version}.x${url_suffix}/${_repo_path}"
+  $base_url = "${_repo_url}/${version_prefix}${version}${version_suffix}/${_repo_path}"
   $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
   $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'

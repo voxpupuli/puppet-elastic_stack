@@ -101,11 +101,24 @@ describe 'elastic_stack::repo', type: 'class' do
 
         case facts[:os]['family']
         when 'Debian'
-          it { is_expected.to declare_apt(version: '6.x-oss') }
+          it { is_expected.to declare_apt(version: 'oss-6.x') }
         when 'RedHat'
-          it { is_expected.to declare_yum(version: '6.x-oss') }
+          it { is_expected.to declare_yum(version: 'oss-6.x') }
         when 'Suse'
-          it { is_expected.to declare_zypper(version: '6.x-oss') }
+          it { is_expected.to declare_zypper(version: 'oss-6.x') }
+        end
+      end
+
+      context 'with "oss and prerelease => true"' do
+        let(:params) { default_params.merge(oss: true, prerelease: true) }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(version: 'oss-6.x-prerelease') }
+        when 'RedHat'
+          it { is_expected.to declare_yum(version: 'oss-6.x-prerelease') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(version: 'oss-6.x-prerelease') }
         end
       end
 
