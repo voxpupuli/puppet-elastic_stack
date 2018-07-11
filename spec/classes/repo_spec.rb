@@ -122,6 +122,19 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
+      context 'with base_repo_url parameter' do
+        let(:params) { default_params.merge(base_repo_url: 'https://mymirror.example.org/elastic-artifacts/packages') }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(location: 'https://mymirror.example.org/elastic-artifacts/packages/6.x/apt') }
+        when 'RedHat'
+          it { is_expected.to declare_yum(baseurl: 'https://mymirror.example.org/elastic-artifacts/packages/6.x/yum') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(baseurl: 'https://mymirror.example.org/elastic-artifacts/packages/6.x/yum') }
+        end
+      end
+
       context 'with proxy parameter' do
         let(:params) { default_params.merge(proxy: 'http://proxy.com:8080') }
 
