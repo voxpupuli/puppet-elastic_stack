@@ -1,3 +1,7 @@
+## Release 6.2.0
+
+- Add base_repo_url param
+
 ## Release 6.1.0
 
 - Support OSS-only package repositories
