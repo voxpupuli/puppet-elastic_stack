@@ -1,3 +1,7 @@
+## Release 6.2.1
+
+- Allow puppetlabs-apt version 5.x
+
 ## Release 6.2.0
 
 - Add base_repo_url param
