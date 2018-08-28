@@ -1,3 +1,7 @@
+## Release 6.2.3
+
+- Allow puppetlabs-yum version 3.x
+
 ## Release 6.2.2
 
 - Allow puppetlabs-stdlib version 5.x
