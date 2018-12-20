@@ -2,7 +2,7 @@ require 'spec_helper'
 
 def url(format, version)
   case version
-  when %r{^2}
+  when %r{^[1-2]}
     repo_type = (format == 'yum') ? 'centos' : 'debian'
     "https://packages.elastic.co/elasticsearch/#{version}/#{repo_type}"
   else
@@ -44,8 +44,21 @@ describe 'elastic_stack::repo', type: 'class' do
         it { is_expected.to contain_exec('elastic_zypper_refresh_elastic').with(command: 'zypper refresh elastic') }
       end
 
-      context 'with "version => 2"' do
-        let(:params) { default_params.merge(version: 2) }
+      context 'with "version => \'1.7\'"' do
+        let(:params) { default_params.merge(version: '1.7') }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(version: '1.7') }
+        when 'RedHat'
+          it { is_expected.to declare_yum(version: '1.7') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(version: '1.7') }
+        end
+      end
+
+      context 'with "version => \'2\'"' do
+        let(:params) { default_params.merge(version: '2') }
 
         case facts[:os]['family']
         when 'Debian'
@@ -57,8 +70,8 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "version => 5"' do
-        let(:params) { default_params.merge(version: 5) }
+      context 'with "version => \'5\'"' do
+        let(:params) { default_params.merge(version: '5') }
 
         case facts[:os]['family']
         when 'Debian'

@@ -16,14 +16,9 @@ class elastic_stack::repo (
   Boolean           $prerelease    = false,
   Optional[Integer] $priority      = undef,
   String            $proxy         = 'absent',
-  Integer           $version       = 6,
+  String            $version       = '6',
   Optional[String]  $base_repo_url = undef,
 ) {
-  if $prerelease {
-    $version_suffix = '.x-prerelease'
-  } else {
-    $version_suffix = '.x'
-  }
 
   if $oss {
     $version_prefix = 'oss-'
@@ -31,30 +26,59 @@ class elastic_stack::repo (
     $version_prefix = ''
   }
 
-  if $version > 2 {
-    $_repo_url = $base_repo_url ? {
-      undef   => 'https://artifacts.elastic.co/packages',
-      default => $base_repo_url,
-    }
-    case $facts['os']['family'] {
-      'Debian': {
-        $_repo_path = 'apt'
+  case $version {
+    default : {
+      if $prerelease {
+        $version_suffix = '.x-prerelease'
+      } else {
+        $version_suffix = '.x'
       }
-      default: {
-        $_repo_path = 'yum'
+      $_repo_url = $base_repo_url ? {
+        undef   => 'https://artifacts.elastic.co/packages',
+        default => $base_repo_url,
+      }
+      case $facts['os']['family'] {
+        'Debian': {
+          $_repo_path = 'apt'
+        }
+        default: {
+          $_repo_path = 'yum'
+        }
       }
     }
-  } else {
-    $_repo_url = $base_repo_url ? {
-      undef   => 'https://packages.elastic.co/elasticsearch',
-      default => $base_repo_url,
-    }
-    case $facts['os']['family'] {
-      'Debian': {
-        $_repo_path = 'debian'
+    /^2/: {
+      if $prerelease {
+        $version_suffix = '.x-prerelease'
+      } else {
+        $version_suffix = '.x'
       }
-      default: {
-        $_repo_path = 'centos'
+
+      $_repo_url = $base_repo_url ? {
+        undef   => 'https://packages.elastic.co/elasticsearch',
+        default => $base_repo_url,
+      }
+      case $facts['os']['family'] {
+        'Debian': {
+          $_repo_path = 'debian'
+        }
+        default: {
+          $_repo_path = 'centos'
+        }
+      }
+    }
+    /^1/: {
+      $version_suffix = ''
+      $_repo_url = $base_repo_url ? {
+        undef   => 'https://packages.elastic.co/elasticsearch',
+        default => $base_repo_url,
+      }
+      case $facts['os']['family'] {
+        'Debian': {
+          $_repo_path = 'debian'
+        }
+        default: {
+          $_repo_path = 'centos'
+        }
       }
     }
   }
