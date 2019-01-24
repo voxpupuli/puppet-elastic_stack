@@ -83,6 +83,11 @@ class elastic_stack::repo (
           'src' => false,
         },
         pin      => $priority,
+      }~>
+      exec { 'elastic_stack_apt_update':
+        command     => 'apt-get update',
+        path        => [ '/usr/bin', '/bin'],
+        refreshonly => true,
       }
     }
     'RedHat', 'Linux': {
