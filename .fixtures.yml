@@ -2,7 +2,7 @@ fixtures:
   forge_modules:
     stdlib: puppetlabs/stdlib
     apt: puppetlabs/apt
-    zypprepo: darin/zypprepo
+    zypprepo: puppet/zypprepo
     yum: puppet/yum
   symlinks:
     elastic_stack: "#{source_dir}"
