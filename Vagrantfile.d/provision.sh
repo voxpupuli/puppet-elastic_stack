@@ -20,8 +20,15 @@ service puppetserver start
 echo '127.0.0.1 localhost puppet vagrant' > /etc/hosts
 
 # Install puppet-elastic-stack dependencies.
-for module in puppetlabs-apt puppet-yum darin-zypprepo; do
+modules=(
+  puppet-yum
+  puppet-zypprepo
+  puppetlabs-apt
+  puppetlabs-yumrepo_core
+)
+
+for module in ${modules[@]}; do
   /opt/puppetlabs/bin/puppet module install \
   --target-dir=/etc/puppetlabs/code/environments/production/modules \
-  $module
+  ${module}
 done

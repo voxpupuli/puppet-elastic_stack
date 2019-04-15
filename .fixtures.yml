@@ -4,5 +4,6 @@ fixtures:
     apt: puppetlabs/apt
     zypprepo: puppet/zypprepo
     yum: puppet/yum
+    yumrepo_core: puppetlabs/yumrepo_core
   symlinks:
     elastic_stack: "#{source_dir}"
