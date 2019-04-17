@@ -1,4 +1,7 @@
-## Release 6.3.0
+## Release 6.3.1
+- Remove extraneous files from module package
+
+## Release 6.3.0 [Deleted from Forge]
 
 - Support Puppet 6
 
