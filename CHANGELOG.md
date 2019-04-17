@@ -1,3 +1,7 @@
+## Release 7.0.0
+- Default to Elastic Stack version 7
+- Drop support for Puppet version < 4.10.0
+
 ## Release 6.3.1
 - Remove extraneous files from module package
 
