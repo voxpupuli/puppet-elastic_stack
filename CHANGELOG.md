@@ -1,3 +1,7 @@
+## Release 6.3.0
+
+- Support Puppet 6
+
 ## Release 6.2.4
 
 - Allow puppetlabs-apt version 6.x
