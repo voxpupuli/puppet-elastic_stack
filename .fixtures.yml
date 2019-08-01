@@ -4,6 +4,8 @@ fixtures:
     apt: puppetlabs/apt
     zypprepo: puppet/zypprepo
     yum: puppet/yum
-    yumrepo_core: puppetlabs/yumrepo_core
+    yumrepo_core:
+      repo: puppetlabs/yumrepo_core
+      puppet_version: ">= 6.0.0"
   symlinks:
     elastic_stack: "#{source_dir}"
