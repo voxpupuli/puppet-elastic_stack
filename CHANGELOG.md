@@ -1,3 +1,9 @@
+## Release 6.3.2
+ - Allow puppetlabs-apt version 7.x
+ - Allow puppetlabs-stdlib version 6.x
+ - Allow puppet-yum version 4.x
+ - Constrain puppetlabs-yumrepo_core to puppet 6+
+
 ## Release 6.3.1
 - Remove extraneous files from module package
 
