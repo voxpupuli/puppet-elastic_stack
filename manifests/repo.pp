@@ -16,7 +16,7 @@ class elastic_stack::repo (
   Boolean           $prerelease    = false,
   Optional[Integer] $priority      = undef,
   String            $proxy         = 'absent',
-  Integer           $version       = 6,
+  Integer           $version       = 7,
   Optional[String]  $base_repo_url = undef,
 ) {
   if $prerelease {
