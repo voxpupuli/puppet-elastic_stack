@@ -29,7 +29,7 @@ describe 'elastic_stack::repo', type: 'class' do
   default_params = {}
   rpm_key_cmd = 'rpmkeys --import https://artifacts.elastic.co/GPG-KEY-elasticsearch'
 
-  on_supported_os(facterversion: '2.4').each do |os, facts|
+  on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) { facts }
 
