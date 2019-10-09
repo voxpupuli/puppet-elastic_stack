@@ -19,7 +19,7 @@ class elastic_stack::repo (
   Integer           $version       = 7,
   Optional[String]  $base_repo_url = undef,
   Optional[String]  $key_source    = 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-  Optional[String]  $key_id        = '46095ACC8548582C1A2699A9D27D666CD88E42B4',  
+  Optional[String]  $key_id        = '46095ACC8548582C1A2699A9D27D666CD88E42B4',
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
