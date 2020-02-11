@@ -1,5 +1,12 @@
 # elastic_stack
 
+[![Build Status](https://travis-ci.org/elastic/puppet-elastic-stack.png?branch=master)](https://travis-ci.org/elastic/puppet-elastic-stack)
+<!-- [![Code Coverage](https://coveralls.io/repos/github/elastic/puppet-elastic-stack/badge.svg?branch=master)](https://coveralls.io/github/elastic/puppet-elastic-stack) -->
+[![Puppet Forge](https://img.shields.io/puppetforge/v/elastic/elastic_stack.svg)](https://forge.puppetlabs.com/elastic/elastic_stack)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/elastic/elastic_stack.svg)](https://forge.puppetlabs.com/elastic/elastic_stack)
+<!-- [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/elastic/elastic_stack.svg)](https://forge.puppetlabs.com/elastic/elastic_stack) -->
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/elastic/elastic_stack.svg)](https://forge.puppetlabs.com/elastic/elastic_stack)
+
 This module contains shared code for various Elastic modules, like
 elastic-elasticsearch, elastic-logstash etc.
 
