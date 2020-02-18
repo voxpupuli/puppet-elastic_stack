@@ -11,6 +11,7 @@
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
 # @param version The (major) version of the Elastic Stack for which to configure the repo
 # @param base_repo_url The base url for the repo path
+# @param architecure The architecture to be used by apt::source
 class elastic_stack::repo (
   Boolean           $oss           = false,
   Boolean           $prerelease    = false,
@@ -18,6 +19,7 @@ class elastic_stack::repo (
   String            $proxy         = 'absent',
   Integer           $version       = 7,
   Optional[String]  $base_repo_url = undef,
+  Optional[String]  $architecture  = undef,
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
@@ -69,20 +71,21 @@ class elastic_stack::repo (
       include apt
 
       apt::source { 'elastic':
-        ensure   => 'present',
-        comment  => $description,
-        location => $base_url,
-        release  => 'stable',
-        repos    => 'main',
-        key      => {
+        ensure       => 'present',
+        comment      => $description,
+        location     => $base_url,
+        architecture => $architecture,
+        release      => 'stable',
+        repos        => 'main',
+        key          => {
           'id'     => $key_id,
           'source' => $key_source,
         },
-        include  => {
+        include      => {
           'deb' => true,
           'src' => false,
         },
-        pin      => $priority,
+        pin          => $priority,
       }
     }
     'RedHat', 'Linux': {

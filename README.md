@@ -48,3 +48,10 @@ class { 'elastic_stack::repo':
   base_repo_url => 'https://mymirror.example.org/elastic-artifacts/packages',
 }
 ```
+
+To use only specific architecture of the repo, set `architecture`, eg.:
+``` puppet
+class { 'elastic_stack::repo':
+  architecture => 'amd64',
+}
+```
