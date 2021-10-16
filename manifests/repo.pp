@@ -18,6 +18,7 @@ class elastic_stack::repo (
   String            $proxy         = 'absent',
   Integer           $version       = 7,
   Optional[String]  $base_repo_url = undef,
+  Optional[String]  $repo_url      = undef,
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
@@ -31,8 +32,10 @@ class elastic_stack::repo (
     $version_prefix = ''
   }
 
+  $_repo_url = pick($repo_url, '#{base_repo_url}/#{version_prefix}#{version}#{version_suffix}/#{repo_path}')
+
   if $version > 2 {
-    $_repo_url = $base_repo_url ? {
+    $_base_repo_url = $base_repo_url ? {
       undef   => 'https://artifacts.elastic.co/packages',
       default => $base_repo_url,
     }
@@ -45,7 +48,7 @@ class elastic_stack::repo (
       }
     }
   } else {
-    $_repo_url = $base_repo_url ? {
+    $_base_repo_url = $base_repo_url ? {
       undef   => 'https://packages.elastic.co/elasticsearch',
       default => $base_repo_url,
     }
@@ -59,7 +62,17 @@ class elastic_stack::repo (
     }
   }
 
-  $base_url = "${_repo_url}/${version_prefix}${version}${version_suffix}/${_repo_path}"
+  $base_url = $_repo_url.regsubst(
+      '#{(base_repo_url|version_prefix|version|version_suffix|repo_path|)}',
+      {
+        '#{base_repo_url}' => $_base_repo_url,
+        '#{version_prefix}' => $version_prefix,
+        '#{version}' => "${version}",
+        '#{version_suffix}' => $version_suffix,
+        '#{repo_path}' => $_repo_path,
+        '#{}' => '',
+      },
+      'G')
   $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
   $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
