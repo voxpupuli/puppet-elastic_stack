@@ -148,6 +148,15 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
+      context 'with architecture parameter' do
+        let(:params) { default_params.merge(architecture: 'amd64') }
+
+        case facts[:os]['family']
+        when 'Debian'
+          it { is_expected.to declare_apt(architecture: 'amd64') }
+        end
+      end
+
       context 'with proxy parameter' do
         let(:params) { default_params.merge(proxy: 'http://proxy.com:8080') }
 
