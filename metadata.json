@@ -29,36 +29,28 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "7",
-        "8",
-        "9"
       ]
     },
     {
       "operatingsystem": "OpenSuSE",
       "operatingsystemrelease": [
-        "42.2"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6.0",
         "7.0"
       ]
     },
     {
       "operatingsystem": "SLES",
       "operatingsystemrelease": [
-        "12.1",
-        "12.2"
+        "12"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "14.04",
-        "16.04"
       ]
     }
   ],
