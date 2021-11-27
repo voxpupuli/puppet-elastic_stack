@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 def url(format, version)
   case version
   when %r{^2}
-    repo_type = (format == 'yum') ? 'centos' : 'debian'
+    repo_type = format == 'yum' ? 'centos' : 'debian'
     "https://packages.elastic.co/elasticsearch/#{version}/#{repo_type}"
   else
     "https://artifacts.elastic.co/packages/#{version}/#{format}"
@@ -44,7 +46,7 @@ describe 'elastic_stack::repo', type: 'class' do
         it { is_expected.to contain_exec('elastic_zypper_refresh_elastic').with(command: 'zypper refresh elastic') }
       end
 
-      context 'with "version => 2"' do
+      context 'with "version => 2"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(version: 2) }
 
         case facts[:os]['family']
@@ -57,7 +59,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "version => 5"' do
+      context 'with "version => 5"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(version: 5) }
 
         case facts[:os]['family']
@@ -70,7 +72,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "version => 6"' do
+      context 'with "version => 6"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(version: 6) }
 
         case facts[:os]['family']
@@ -83,7 +85,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "priority => 99"' do
+      context 'with "priority => 99"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(priority: 99) }
 
         case facts[:os]['family']
@@ -96,7 +98,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "prerelease => true"' do
+      context 'with "prerelease => true"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(prerelease: true) }
 
         case facts[:os]['family']
@@ -109,7 +111,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "oss => true"' do
+      context 'with "oss => true"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(oss: true) }
 
         case facts[:os]['family']
@@ -122,7 +124,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with "oss and prerelease => true"' do
+      context 'with "oss and prerelease => true"' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(oss: true, prerelease: true) }
 
         case facts[:os]['family']
@@ -135,7 +137,7 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
-      context 'with base_repo_url parameter' do
+      context 'with base_repo_url parameter' do # rubocop:disable RSpec/EmptyExampleGroup
         let(:params) { default_params.merge(base_repo_url: 'https://mymirror.example.org/elastic-artifacts/packages') }
 
         case facts[:os]['family']
