@@ -1,11 +1,7 @@
 fixtures:
-  forge_modules:
-    stdlib: puppetlabs/stdlib
-    apt: puppetlabs/apt
-    zypprepo: puppet/zypprepo
-    yum: puppet/yum
-    yumrepo_core:
-      repo: puppetlabs/yumrepo_core
-      puppet_version: ">= 6.0.0"
-  symlinks:
-    elastic_stack: "#{source_dir}"
+  repositories:
+    apt: https://github.com/puppetlabs/puppetlabs-apt.git
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    yum: https://github.com/voxpupuli/puppet-yum.git
+    yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+    zypprepo: https://github.com/voxpupuli/puppet-zypprepo.git
