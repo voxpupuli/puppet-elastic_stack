@@ -1,12 +1,12 @@
 {
-  "name": "elastic-elastic_stack",
+  "name": "puppet-elastic_stack",
   "version": "7.0.0",
-  "author": "toby@jarpy.net",
+  "author": "voxpupuli@groups.io",
   "summary": "Helpers for installing and configuring components of the Elastic Stack.",
   "license": "Apache-2.0",
-  "source": "https://github.com/elastic/puppet-elastic-stack",
-  "project_page": "https://github.com/elastic/puppet-elastic-stack",
-  "issues_url": "https://github.com/elastic/puppet-elastic-stack/issues",
+  "source": "https://github.com/voxpupuli/puppet-elastic-stack",
+  "project_page": "https://github.com/voxpupuli/puppet-elastic-stack",
+  "issues_url": "https://github.com/voxpupuli/puppet-elastic-stack/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
