@@ -19,10 +19,6 @@
     {
       "name": "puppet/yum",
       "version_requirement": ">= 0.9.6 < 5.0.0"
-    },
-    {
-      "name": "puppetlabs/yumrepo_core",
-      "version_requirement": ">= 1.0.0 < 2.0.0"
     }
   ],
   "operatingsystem_support": [
