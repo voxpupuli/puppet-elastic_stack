@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.0.1](https://github.com/voxpupuli/puppet-elastic_stack/tree/v8.0.1) (2022-08-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v8.0.0...v8.0.1)
+
+**Merged pull requests:**
+
+- puppet/yum: Allow 6.x [\#53](https://github.com/voxpupuli/puppet-elastic_stack/pull/53) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v8.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v8.0.0) (2021-12-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/7.0.0...v8.0.0)
