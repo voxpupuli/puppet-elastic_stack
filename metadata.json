@@ -1,7 +1,7 @@
 {
   "name": "puppet-elastic_stack",
-  "version": "8.0.2-rc0",
-  "author": "voxpupuli@groups.io",
+  "version": "8.0.2",
+  "author": "Vox Pupuli",
   "summary": "Helpers for installing and configuring components of the Elastic Stack.",
   "license": "Apache-2.0",
   "source": "https://github.com/voxpupuli/puppet-elastic-stack",
