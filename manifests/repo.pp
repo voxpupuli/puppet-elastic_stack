@@ -5,19 +5,23 @@
 # @example
 #   include elastic_stack::repo
 #
+# @param base_repo_url The base url for the repo path
+# @param key_id The GPG Key id
+# @param key_source The GPG key url
 # @param oss Whether to use the purely open source (i.e., bundled without X-Pack) repository
 # @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 # @param priority A numeric priority for the repo, passed to the package management system
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
 # @param version The (major) version of the Elastic Stack for which to configure the repo
-# @param base_repo_url The base url for the repo path
 class elastic_stack::repo (
+  Optional[String]  $base_repo_url = undef,
+  String[1]         $key_id        = '46095ACC8548582C1A2699A9D27D666CD88E42B4',
+  Stdlib::HTTPUrl   $key_source    = 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
   Boolean           $oss           = false,
   Boolean           $prerelease    = false,
   Optional[Integer] $priority      = undef,
   String            $proxy         = 'absent',
   Integer           $version       = 7,
-  Optional[String]  $base_repo_url = undef,
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
@@ -60,8 +64,6 @@ class elastic_stack::repo (
   }
 
   $base_url = "${_repo_url}/${version_prefix}${version}${version_suffix}/${_repo_path}"
-  $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
-  $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
 
   case $facts['os']['family'] {

@@ -59,6 +59,22 @@ class { 'elastic_stack::repo':
 }
 ```
 
+To use a custom GPG key, set `key_source`, like this:
+
+```puppet
+class { 'elastic_stack::repo':
+  key_source => 'https://mymirror.example.org/GPG-KEY-elasticsearch',
+}
+```
+
+(DEBIAN ONLY) To use a custom GPG key id/fingerprint, set `key_id`, like this:
+
+```puppet
+class { 'elastic_stack::repo':
+  key_id => 'AB000ACC8548582C1A2699A9D27D666CD88E42B4',
+}
+```
+
 ## Transfer Notice
 
 This module was originally authored by [Elastic](https://www.elastic.co).
