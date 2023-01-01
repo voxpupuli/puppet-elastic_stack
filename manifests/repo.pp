@@ -5,6 +5,7 @@
 # @example
 #   include elastic_stack::repo
 #
+# @param key_weak_ssl The option weak_ssl (only for debian)
 # @param oss Whether to use the purely open source (i.e., bundled without X-Pack) repository
 # @param prerelease Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 # @param priority A numeric priority for the repo, passed to the package management system
@@ -12,6 +13,7 @@
 # @param version The (major) version of the Elastic Stack for which to configure the repo
 # @param base_repo_url The base url for the repo path
 class elastic_stack::repo (
+  Boolean           $key_weak_ssl  = false,
   Boolean           $oss           = false,
   Boolean           $prerelease    = false,
   Optional[Integer] $priority      = undef,
@@ -75,8 +77,9 @@ class elastic_stack::repo (
         release  => 'stable',
         repos    => 'main',
         key      => {
-          'id'     => $key_id,
-          'source' => $key_source,
+          'id'       => $key_id,
+          'source'   => $key_source,
+          'weak_ssl' => $key_weak_ssl,
         },
         include  => {
           'deb' => true,

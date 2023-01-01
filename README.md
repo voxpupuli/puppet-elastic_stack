@@ -59,6 +59,14 @@ class { 'elastic_stack::repo':
 }
 ```
 
+(DEBIAN ONLY) To define the [key option 'weak_ssl'](https://github.com/puppetlabs/puppetlabs-apt/blob/8927af46c0bb430be677bc919323c133204a253d/REFERENCE.md#weak_ssl) , set `key_weak_ssl`, like this:
+
+```puppet
+class { 'elastic_stack::repo':
+  key_weak_ssl => true,
+}
+```
+
 ## Transfer Notice
 
 This module was originally authored by [Elastic](https://www.elastic.co).

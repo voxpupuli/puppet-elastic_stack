@@ -150,6 +150,20 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
+      context 'with key_weak_ssl parameter' do
+        let(:params) { default_params.merge(key_weak_ssl: true) }
+
+        case facts[:os]['family']
+        when 'Debian'
+          apt_key = {
+            'id' => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
+            'source' => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+            'weak_ssl' => true
+          }
+          it { is_expected.to declare_apt(key: apt_key) }
+        end
+      end
+
       context 'with proxy parameter' do
         let(:params) { default_params.merge(proxy: 'http://proxy.com:8080') }
 
