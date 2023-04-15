@@ -6,11 +6,11 @@
 
 ### Classes
 
-* [`elastic_stack::repo`](#elastic_stackrepo): Set up the package repository for Elastic Stack components
+* [`elastic_stack::repo`](#elastic_stack--repo): Set up the package repository for Elastic Stack components
 
 ## Classes
 
-### <a name="elastic_stackrepo"></a>`elastic_stack::repo`
+### <a name="elastic_stack--repo"></a>`elastic_stack::repo`
 
 elastic_stack::repo
 
@@ -26,38 +26,38 @@ include elastic_stack::repo
 
 The following parameters are available in the `elastic_stack::repo` class:
 
-* [`oss`](#oss)
-* [`prerelease`](#prerelease)
-* [`priority`](#priority)
-* [`proxy`](#proxy)
-* [`version`](#version)
-* [`base_repo_url`](#base_repo_url)
+* [`oss`](#-elastic_stack--repo--oss)
+* [`prerelease`](#-elastic_stack--repo--prerelease)
+* [`priority`](#-elastic_stack--repo--priority)
+* [`proxy`](#-elastic_stack--repo--proxy)
+* [`version`](#-elastic_stack--repo--version)
+* [`base_repo_url`](#-elastic_stack--repo--base_repo_url)
 
-##### <a name="oss"></a>`oss`
+##### <a name="-elastic_stack--repo--oss"></a>`oss`
 
 Data type: `Boolean`
 
 Whether to use the purely open source (i.e., bundled without X-Pack) repository
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="prerelease"></a>`prerelease`
+##### <a name="-elastic_stack--repo--prerelease"></a>`prerelease`
 
 Data type: `Boolean`
 
 Whether to use a repo for prerelease versions, like "6.0.0-rc2"
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="priority"></a>`priority`
+##### <a name="-elastic_stack--repo--priority"></a>`priority`
 
 Data type: `Optional[Integer]`
 
 A numeric priority for the repo, passed to the package management system
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="proxy"></a>`proxy`
+##### <a name="-elastic_stack--repo--proxy"></a>`proxy`
 
 Data type: `String`
 
@@ -65,7 +65,7 @@ The URL of a HTTP proxy to use for package downloads (YUM only)
 
 Default value: `'absent'`
 
-##### <a name="version"></a>`version`
+##### <a name="-elastic_stack--repo--version"></a>`version`
 
 Data type: `Integer`
 
@@ -73,11 +73,11 @@ The (major) version of the Elastic Stack for which to configure the repo
 
 Default value: `7`
 
-##### <a name="base_repo_url"></a>`base_repo_url`
+##### <a name="-elastic_stack--repo--base_repo_url"></a>`base_repo_url`
 
 Data type: `Optional[String]`
 
 The base url for the repo path
 
-Default value: ``undef``
+Default value: `undef`
 
