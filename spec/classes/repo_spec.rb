@@ -150,6 +150,23 @@ describe 'elastic_stack::repo', type: 'class' do
         end
       end
 
+      context 'with key_id key_source parameters' do
+        let(:params) { default_params.merge(key_id: 'AB000ACC8548582C1A2699A9D27D666CD88E42B4', key_source: 'https://mymirror.example.org/GPG-KEY-elasticsearch') }
+
+        case facts[:os]['family']
+        when 'Debian'
+          key_id_source = {
+            'id' => 'AB000ACC8548582C1A2699A9D27D666CD88E42B4',
+            'source' => 'https://mymirror.example.org/GPG-KEY-elasticsearch'
+          }
+          it { is_expected.to declare_apt(key: key_id_source) }
+        when 'RedHat'
+          it { is_expected.to declare_yum(gpgkey: 'https://mymirror.example.org/GPG-KEY-elasticsearch') }
+        when 'Suse'
+          it { is_expected.to declare_zypper(gpgkey: 'https://mymirror.example.org/GPG-KEY-elasticsearch') }
+        end
+      end
+
       context 'with proxy parameter' do
         let(:params) { default_params.merge(proxy: 'http://proxy.com:8080') }
 
