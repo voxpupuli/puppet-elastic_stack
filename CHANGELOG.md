@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v9.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v9.0.0) (2023-08-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v8.0.2...v9.0.0)
+
+**Breaking changes:**
+
+- Drop Puppet 6 support [\#63](https://github.com/voxpupuli/puppet-elastic_stack/pull/63) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add AlmaLinux/Rocky/CentOS support [\#67](https://github.com/voxpupuli/puppet-elastic_stack/pull/67) ([bastelfreak](https://github.com/bastelfreak))
+- Add Puppet 8 support [\#66](https://github.com/voxpupuli/puppet-elastic_stack/pull/66) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#65](https://github.com/voxpupuli/puppet-elastic_stack/pull/65) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v8.0.2](https://github.com/voxpupuli/puppet-elastic_stack/tree/v8.0.2) (2022-08-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v8.0.1...v8.0.2)
