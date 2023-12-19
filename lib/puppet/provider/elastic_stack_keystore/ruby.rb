@@ -38,7 +38,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if keystore_env.empty?
       @elastic_keystore_password_file ||= "#{configdir('elasticsearch')}/.elasticsearch-keystore-password"
     else
-      @elastic_keystore_password_file ||= keystore_env 
+      @elastic_keystore_password_file ||= keystore_env
     end
   end
 
@@ -169,7 +169,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     dir = get_envvar(service, '(ES|KBN)_PATH_CONF')
     if dir.empty?
       File.join("/etc", service)
-    else      
+    else
       dir
     end
   end
@@ -261,7 +261,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       if resource[:purge]
         (@property_hash[:settings].keys.sort - @property_flush[:settings].keys.sort).each do |setting|
           debug(self.class.run_keystore(
-                  ['remove', setting], service 
+                  ['remove', setting], service
                 ))
         end
       end
