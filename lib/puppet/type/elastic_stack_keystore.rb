@@ -64,13 +64,13 @@ Puppet::Type.newtype(:elastic_stack_keystore) do
     def is_to_s(value)
       debug("into is_to_s #{value}")
       # hide sensitive data
-      value.map { |k, _| [k, 'xxxx'] }.to_h.inspect
+      value.to_h { |k, _| [k, 'xxxx'] }.inspect
     end
 
     def should_to_s(value)
       debug("into should_to_s #{value}")
       # hide sensitive data
-      value.map { |k, _| [k, 'xxxx'] }.to_h.inspect
+      value.to_h { |k, _| [k, 'xxxx'] }.inspect
     end
 
     def change_to_s(currentvalue, newvalue)
