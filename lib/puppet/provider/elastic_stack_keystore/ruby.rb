@@ -129,11 +129,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
                          end
       settings = {}
       run_keystore(['list'], service).split("\n").each do |setting|
-        if service == 'kibana'
-          settings[setting] = ''
-        else
-          settings[setting] = run_keystore(['show', setting], service)
-        end
+        settings[setting] = service == 'kibana' ? '' : run_keystore(['show', setting], service)
       end
       [{
         name: service,
