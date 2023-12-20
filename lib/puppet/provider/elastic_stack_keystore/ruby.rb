@@ -92,7 +92,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
     if service == 'elasticsearch'
       unless args[0] == 'passwd' || args[0] == 'has-passwd'
-        if has_passwd?(service)
+        if passwd?(service)
           unless password.strip.empty?
             if stdin.nil?
               stdin = password
@@ -132,7 +132,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if File.file?(keystore_file)
       current_password = case service
                          when 'elasticsearch'
-                           if has_passwd?(service)
+                           if passwd?(service)
                              File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password(password.value)
                            else
                              elastic_keystore_password(password.value)
@@ -195,13 +195,13 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     end
   end
 
-  def self.has_passwd?(service)
+  def self.passwd?(service)
     has_passwd = run_keystore(['has-passwd'], service).split("\n").last
     has_passwd.match? /^Keystore is password-protected/
   end
 
   def self.keystore_password_management(service)
-    if has_passwd?(service)
+    if passwd?(service)
       unless elastic_keystore_password_bak.strip.empty?
         run_keystore(['passwd'], service) if elastic_keystore_password != elastic_keystore_password_bak
       end
