@@ -84,14 +84,8 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
     if service == 'elasticsearch'
       unless args[0] == 'passwd' || args[0] == 'has-passwd'
-        if passwd?(service)
-          unless password.strip.empty?
-            if stdin.nil?
-              stdin = password
-            else
-              stdin = "#{password}\n#{stdin}"
-            end
-          end
+        if passwd?(service) && !password.strip.empty?
+          stdin = stdin.nil? ? password : "#{password}\n#{stdin}"
         end
       end
     end
@@ -190,7 +184,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.passwd?(service)
     has_passwd = run_keystore(['has-passwd'], service).split("\n").last
-    has_passwd.match? /^Keystore is password-protected/
+    has_passwd.match?(/^Keystore is password-protected/)
   end
 
   def self.keystore_password_management(service)
