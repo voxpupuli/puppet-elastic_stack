@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper_rspec'
+require 'spec_helper'
 require 'facter'
 
 describe Puppet::Type.type(:elastic_stack_keystore) do
