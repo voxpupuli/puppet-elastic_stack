@@ -79,11 +79,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       options[:combine] = true
     elsif args[0] == 'passwd'
       options[:combine] = true
-      if File.file?(elastic_keystore_password_file_bak)
-        stdin = "#{elastic_keystore_password_bak}\n#{elastic_keystore_password}\n#{elastic_keystore_password}"
-      else
-        stdin = "#{elastic_keystore_password}\n#{elastic_keystore_password}"
-      end
+      stdin = File.file?(elastic_keystore_password_file_bak) ? "#{elastic_keystore_password_bak}\n#{elastic_keystore_password}\n#{elastic_keystore_password}" : "#{elastic_keystore_password}\n#{elastic_keystore_password}"
     end
 
     if service == 'elasticsearch'
@@ -172,6 +168,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if File.file?(defaults_file)
       File.readlines(defaults_file).each do |line|
         next if line =~ /^#/
+
         key, value = line.split '='
         if key =~ /#{env}/
           val = value.gsub(/"/, '').strip
