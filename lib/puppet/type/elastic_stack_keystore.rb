@@ -52,13 +52,11 @@ Puppet::Type.newtype(:elastic_stack_keystore) do
       else
         if resource[:purge]
           value == @should.first
+        elsif (@should.first.keys.sort - value.keys.sort).empty?
+          # compare the values of keys in common
+          (@should.first.values.sort - value.values.sort).empty?
         else
-          if (@should.first.keys.sort - value.keys.sort).empty?
-            # compare the values of keys in common
-            (@should.first.values.sort - value.values.sort).empty?
-          else
-            false
-          end
+          false
         end
       end
     end
