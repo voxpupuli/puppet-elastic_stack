@@ -187,7 +187,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.instances(password = '')
     keystores = []
-    ['kibana', 'elasticsearch'].each do |service|
+    %w[kibana elasticsearch].each do |service|
       keystores = keystores.concat(present_keystores(configdir(service), service, password))
     end
     keystores.map do |keystore|
