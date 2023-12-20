@@ -8,7 +8,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   mk_resource_methods
 
   def self.defaults_dir
-    @defaults_dir ||= case Facter.value('osfamily')
+    @defaults_dir ||= case #{Facter.value(:os)['family']} 
                       when 'RedHat'
                         '/etc/sysconfig'
                       else
@@ -17,7 +17,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   end
 
   def self.root_dir
-    @root_dir ||= case Facter.value('osfamily')
+    @root_dir ||= case #{Facter.value(:os)['family']} 
                   when 'OpenBSD'
                     '/usr/local'
                   else
