@@ -95,7 +95,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
         if has_passwd?(service)
           unless password.strip.empty?
             if stdin.nil?
-              stdin = "#{password}"
+              stdin = password
             else
               stdin = "#{password}\n#{stdin}"
             end
