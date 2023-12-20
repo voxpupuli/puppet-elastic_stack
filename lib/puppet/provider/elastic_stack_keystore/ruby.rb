@@ -75,17 +75,17 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     }
 
     password = case service
-               when "elasticsearch"
+               when 'elasticsearch'
                  File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password
                else
                  ''
                end
 
     cmd = [command("#{service}_keystore")]
-    if args[0] == "create" || args[0] == "has-passwd"
+    if args[0] == 'create' || args[0] == 'has-passwd'
       options[:failonfail] = false
       options[:combine] = true
-    elsif args[0] == "passwd"
+    elsif args[0] == 'passwd'
       options[:combine] = true
       if File.file?(elastic_keystore_password_file_bak)
         stdin = "#{elastic_keystore_password_bak}\n#{elastic_keystore_password}\n#{elastic_keystore_password}"
@@ -94,8 +94,8 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       end
     end
 
-    if service == "elasticsearch"
-      unless args[0] == "passwd" || args[0] == "has-passwd"
+    if service == 'elasticsearch'
+      unless args[0] == 'passwd' || args[0] == 'has-passwd'
         if has_passwd?(service)
           unless password.strip.empty?
             if stdin.nil?
@@ -135,7 +135,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     keystore_file = File.join(configdir, "#{service}.keystore")
     if File.file?(keystore_file)
       current_password = case service
-                         when "elasticsearch"
+                         when 'elasticsearch'
                            if has_passwd?(service)
 			     File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password(password.value)
                            else
@@ -147,7 +147,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
                          end
       settings = {}
       run_keystore(['list'], service).split("\n").each do |setting|
-        if service == "kibana"
+        if service == 'kibana'
           settings[setting] = ''
         else
           settings[setting] = run_keystore(['show', setting], service)
@@ -168,7 +168,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   def self.configdir(service)
     dir = get_envvar(service, '(ES|KBN)_PATH_CONF')
     if dir.empty?
-      File.join("/etc", service)
+      File.join('/etc', service)
     else
       dir
     end
@@ -180,7 +180,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if File.file?(defaults_file)
       File.readlines(defaults_file).each do |line|
         next if line =~ /^#/
-        key,value = line.split "="
+        key,value = line.split '='
         if key =~ /#{env}/
           val = value.gsub(/"/, '').strip
         end
@@ -252,7 +252,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
           && @property_hash[:settings][setting] == value
 
         args = ['add', '--force']
-        args << '--stdin' if service == "kibana"
+        args << '--stdin' if service == 'kibana'
         args << setting
         debug(self.class.run_keystore(args, service, value))
       end
@@ -269,7 +269,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
     keystore_settings = self.class.run_keystore(['list'], service).split("\n").each do |setting|
       settings = {}
-      if service == "kibana"
+      if service == 'kibana'
         settings[setting] = ''
       else
         settings[setting] = self.class.run_keystore(['show', setting], service)
@@ -277,8 +277,8 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       settings
     end
 
-    # if service == "elasticsearch" && @property_flush.key?(:password)
-    if service == "elasticsearch"
+    # if service == 'elasticsearch' && @property_flush.key?(:password)
+    if service == 'elasticsearch'
       # set and update keystore password if needed
       self.class.keystore_password_management(service)
       # unlink backup file containing keystore password (synced)
