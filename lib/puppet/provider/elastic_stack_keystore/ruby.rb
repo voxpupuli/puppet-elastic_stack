@@ -195,9 +195,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.keystore_password_management(service)
     if passwd?(service)
-      unless elastic_keystore_password_bak.strip.empty?
-        run_keystore(['passwd'], service) if elastic_keystore_password != elastic_keystore_password_bak
-      end
+      run_keystore(['passwd'], service) unless elastic_keystore_password_bak.strip.empty? || elastic_keystore_password == elastic_keystore_password_bak
     else
       run_keystore(['passwd'], service) unless elastic_keystore_password.empty?
     end
