@@ -240,10 +240,9 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       end
     end
 
-    keystore_settings = self.class.run_keystore(['list'], service).split("\n").each do |setting|
-      settings = {}
-      settings[setting] = service == 'kibana' ? '' : self.class.run_keystore(['show', setting], service)
-      settings
+    keystore_settings = {}
+    self.class.run_keystore(['list'], service).split("\n").each do |setting|
+      keystore_settings[setting] = service == 'kibana' ? '' : self.class.run_keystore(['show', setting], service)
     end
 
     # if service == 'elasticsearch' && @property_flush.key?(:password)
