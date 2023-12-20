@@ -82,11 +82,9 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       stdin = File.file?(elastic_keystore_password_file_bak) ? "#{elastic_keystore_password_bak}\n#{elastic_keystore_password}\n#{elastic_keystore_password}" : "#{elastic_keystore_password}\n#{elastic_keystore_password}"
     end
 
-    if service == 'elasticsearch'
-      unless args[0] == 'passwd' || args[0] == 'has-passwd'
-        if passwd?(service) && !password.strip.empty?
-          stdin = stdin.nil? ? password : "#{password}\n#{stdin}"
-        end
+    unless args[0] == 'passwd' || args[0] == 'has-passwd'
+      if service == 'elasticsearch' && passwd?(service) && !password.strip.empty?
+        stdin = stdin.nil? ? password : "#{password}\n#{stdin}"
       end
     end
 
@@ -118,8 +116,10 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if File.file?(keystore_file)
       current_password = case service
                          when 'elasticsearch'
-                           if passwd?(service)
-                             File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password(password.value)
+                           if passwd?(service) && File.file?(elastic_keystore_password_file_bak)
+                             elastic_keystore_password_bak
+                           elsif passwd?(service)
+                             elastic_keystore_password(password.value)
                            else
                              elastic_keystore_password(password.value)
                              ''
