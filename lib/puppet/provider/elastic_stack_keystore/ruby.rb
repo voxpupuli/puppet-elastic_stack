@@ -133,9 +133,9 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
       current_password = case service
                          when 'elasticsearch'
                            if has_passwd?(service)
-			     File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password(password.value)
+                             File.file?(elastic_keystore_password_file_bak) ? elastic_keystore_password_bak : elastic_keystore_password(password.value)
                            else
-			     elastic_keystore_password(password.value)
+                             elastic_keystore_password(password.value)
                              ''
                            end
                          else
