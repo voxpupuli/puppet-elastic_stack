@@ -157,10 +157,10 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     val = ''
     if File.file?(defaults_file)
       File.readlines(defaults_file).each do |line|
-        next if line =~ /^#/
+        next if line =~ %r{^#}
 
         key, value = line.split '='
-        val = value.gsub(/"/, '').strip if key =~ /#{env}/
+        val = value.gsub(%r{"}, '').strip if key =~ %r{#{env}}
       end
     end
     val
@@ -178,7 +178,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.passwd?(service)
     has_passwd = run_keystore(['has-passwd'], service).split("\n").last
-    has_passwd.match?(/^Keystore is password-protected/)
+    has_passwd.match?(%r{^Keystore is password-protected})
   end
 
   def self.keystore_password_management(service)
