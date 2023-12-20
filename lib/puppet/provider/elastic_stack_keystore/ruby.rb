@@ -164,9 +164,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
         next if line =~ /^#/
 
         key, value = line.split '='
-        if key =~ /#{env}/
-          val = value.gsub(/"/, '').strip
-        end
+        val = value.gsub(/"/, '').strip if key =~ /#{env}/
       end
     end
     val
