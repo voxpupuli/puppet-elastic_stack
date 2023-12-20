@@ -51,7 +51,6 @@ Puppet::Type.newtype(:elastic_stack_keystore) do
         end
       else
         if resource[:purge]
-          #value.sort == @should.first.keys.sort
           value == @should.first
         else
           if (@should.first.keys.sort - value.keys.sort).empty?
