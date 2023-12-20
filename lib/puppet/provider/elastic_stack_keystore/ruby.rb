@@ -35,11 +35,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.elastic_keystore_password_file
     keystore_env = get_envvar('elasticsearch', 'ES_KEYSTORE_PASSPHRASE_FILE')
-    if keystore_env.empty?
-      @elastic_keystore_password_file ||= "#{configdir('elasticsearch')}/.elasticsearch-keystore-password"
-    else
-      @elastic_keystore_password_file ||= keystore_env
-    end
+    @elastic_keystore_password_file ||= keystore_env.empty? ? "#{configdir('elasticsearch')}/.elasticsearch-keystore-password" : keystore_env
   end
 
   def self.elastic_keystore_password(password = '')
