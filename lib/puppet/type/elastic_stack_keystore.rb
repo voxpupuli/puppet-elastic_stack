@@ -91,7 +91,7 @@ Puppet::Type.newtype(:elastic_stack_keystore) do
                end
       end
 
-      changed = newvalue.map { |k,v| currentvalue[k] == v ? nil : k }.compact
+      changed = newvalue.map { |k, v| currentvalue[k] == v ? nil : k }.compact
       ret << "changed: #{changed.join(', ')}" unless changed.empty?
 
       ret
