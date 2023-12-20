@@ -51,11 +51,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   end
 
   def self.elastic_keystore_password_bak
-    if File.file?(elastic_keystore_password_file_bak)
-      @elastic_keystore_password_bak ||= File.open(elastic_keystore_password_file_bak, &:readline).strip
-    else
-      @elastic_keystore_password_bak ||= ''
-    end
+    @elastic_keystore_password_bak ||= File.file?(elastic_keystore_password_file_bak) ? File.open(elastic_keystore_password_file_bak, &:readline).strip : ''
   end
 
   attr_accessor :defaults_dir, :root_dir, :home_dir_kibana, :home_dir_elasticsearch, :elastic_keystore_password_file, :elastic_keystore_password, :elastic_keystore_password_file_bak, :elastic_keystore_password_bak
