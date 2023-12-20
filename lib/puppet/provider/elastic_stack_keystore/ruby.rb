@@ -180,7 +180,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
     if File.file?(defaults_file)
       File.readlines(defaults_file).each do |line|
         next if line =~ /^#/
-        key,value = line.split '='
+        key, value = line.split '='
         if key =~ /#{env}/
           val = value.gsub(/"/, '').strip
         end
@@ -191,7 +191,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
   def self.instances(password = '')
     keystores = []
-    ['kibana','elasticsearch'].each do |service|
+    ['kibana', 'elasticsearch'].each do |service|
       keystores = keystores.concat(present_keystores(configdir(service), service, password))
     end
     keystores.map do |keystore|
