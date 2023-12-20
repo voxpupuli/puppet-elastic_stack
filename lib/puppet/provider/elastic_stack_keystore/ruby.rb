@@ -8,7 +8,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   mk_resource_methods
 
   def self.defaults_dir
-    @defaults_dir ||= case #{Facter.value(:os)['family']} 
+    @defaults_dir ||= case Facter.value(:os)['family']
                       when 'RedHat'
                         '/etc/sysconfig'
                       else
@@ -17,7 +17,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
   end
 
   def self.root_dir
-    @root_dir ||= case #{Facter.value(:os)['family']} 
+    @root_dir ||= case Facter.value(:os)['family']
                   when 'OpenBSD'
                     '/usr/local'
                   else
@@ -269,11 +269,7 @@ Puppet::Type.type(:elastic_stack_keystore).provide(
 
     keystore_settings = self.class.run_keystore(['list'], service).split("\n").each do |setting|
       settings = {}
-      if service == 'kibana'
-        settings[setting] = ''
-      else
-        settings[setting] = self.class.run_keystore(['show', setting], service)
-      end
+      settings[setting] = service == 'kibana' ? '' : self.class.run_keystore(['show', setting], service)
       settings
     end
 
