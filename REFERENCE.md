@@ -8,6 +8,10 @@
 
 * [`elastic_stack::repo`](#elastic_stack--repo): Set up the package repository for Elastic Stack components
 
+### Resource types
+
+* [`elastic_stack_keystore`](#elastic_stack_keystore): Manages a keystore settings file (for either Elasticserach or Kibana service.
+
 ## Classes
 
 ### <a name="elastic_stack--repo"></a>`elastic_stack::repo`
@@ -80,4 +84,62 @@ Data type: `Optional[String]`
 The base url for the repo path
 
 Default value: `undef`
+
+## Resource types
+
+### <a name="elastic_stack_keystore"></a>`elastic_stack_keystore`
+
+Manages a keystore settings file (for either Elasticserach or Kibana service.
+
+#### Properties
+
+The following properties are available in the `elastic_stack_keystore` type.
+
+##### `ensure`
+
+Valid values: `present`, `absent`
+
+The basic property that the resource should be in.
+
+Default value: `present`
+
+##### `password`
+
+Password to protect keystore.
+
+Default value: `''`
+
+##### `settings`
+
+A key/value hash of settings names and values.
+
+#### Parameters
+
+The following parameters are available in the `elastic_stack_keystore` type.
+
+* [`provider`](#-elastic_stack_keystore--provider)
+* [`purge`](#-elastic_stack_keystore--purge)
+* [`service`](#-elastic_stack_keystore--service)
+
+##### <a name="-elastic_stack_keystore--provider"></a>`provider`
+
+The specific backend to use for this `elastic_stack_keystore` resource. You will seldom need to specify this --- Puppet
+will usually discover the appropriate provider for your platform.
+
+##### <a name="-elastic_stack_keystore--purge"></a>`purge`
+
+Valid values: `true`, `false`, `yes`, `no`
+
+Whether to proactively remove settings that exist in the keystore but
+are not present in this resource's settings.
+
+Default value: `false`
+
+##### <a name="-elastic_stack_keystore--service"></a>`service`
+
+Valid values: `elasticsearch`, `kibana`
+
+Service that manages the keystore (either "elasticsearch" or "kibana").
+
+Default value: `elasticsearch`
 
