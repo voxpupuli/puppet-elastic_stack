@@ -18,7 +18,21 @@ class elastic_stack::repo (
   String            $proxy         = 'absent',
   Integer           $version       = 7,
   Optional[String]  $base_repo_url = undef,
+  String            $repo_key_url  = undef,
+  String            $repo_key_id   = undef,
 ) {
+  if $repo_key_url {
+    $repo_key_url_real = $repo_key_url
+  } else {
+    $repo_key_url_real = '$https://artifacts.elastic.co/GPG-KEY-elasticsearch'
+  }
+
+  if $repo_key_id {
+    $repo_key_id_real = $repo_key_id
+  } else {
+    $repo_key_id_real = '46095ACC8548582C1A2699A9D27D666CD88E42B4'
+  }
+
   if $prerelease {
     $version_suffix = '.x-prerelease'
   } else {
@@ -75,8 +89,8 @@ class elastic_stack::repo (
         release  => 'stable',
         repos    => 'main',
         key      => {
-          'id'     => $key_id,
-          'source' => $key_source,
+          'id'     => $repo_key_id_real,
+          'source' => $repo_key_url_real,
         },
         include  => {
           'deb' => true,
