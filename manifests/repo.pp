@@ -68,21 +68,18 @@ class elastic_stack::repo (
     'Debian': {
       include apt
 
+      apt::keyring { 'elastic.gpg':
+        source => $key_source,
+      }
+
       apt::source { 'elastic':
-        ensure   => 'present',
         comment  => $description,
         location => $base_url,
         release  => 'stable',
         repos    => 'main',
-        key      => {
-          'id'     => $key_id,
-          'source' => $key_source,
-        },
-        include  => {
-          'deb' => true,
-          'src' => false,
-        },
+        keyring  => '/etc/apt/keyrings/elastic.gpg',
         pin      => $priority,
+        require  => Apt::Keyring['elastic.gpg'],
       }
     }
     'RedHat', 'Linux': {
