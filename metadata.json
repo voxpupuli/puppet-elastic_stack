@@ -1,6 +1,6 @@
 {
   "name": "puppet-elastic_stack",
-  "version": "9.0.1-rc0",
+  "version": "10.0.0",
   "author": "Vox Pupuli",
   "summary": "Helpers for installing and configuring components of the Elastic Stack.",
   "license": "Apache-2.0",
