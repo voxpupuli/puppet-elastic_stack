@@ -60,7 +60,6 @@ class elastic_stack::repo (
   }
 
   $base_url = "${_repo_url}/${version_prefix}${version}${version_suffix}/${_repo_path}"
-  $key_id='46095ACC8548582C1A2699A9D27D666CD88E42B4'
   $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
 
@@ -69,18 +68,13 @@ class elastic_stack::repo (
       include apt
 
       apt::source { 'elastic':
-        ensure   => 'present',
         comment  => $description,
         location => $base_url,
         release  => 'stable',
         repos    => 'main',
         key      => {
-          'id'     => $key_id,
+          'name'   => 'elastic.asc',
           'source' => $key_source,
-        },
-        include  => {
-          'deb' => true,
-          'src' => false,
         },
         pin      => $priority,
       }
