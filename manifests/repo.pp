@@ -11,13 +11,19 @@
 # @param proxy The URL of a HTTP proxy to use for package downloads (YUM only)
 # @param version The (major) version of the Elastic Stack for which to configure the repo
 # @param base_repo_url The base url for the repo path
+# @param gpg_key_source The gpg key for the repo
+# @param apt_keyring_name The keyring filename to create (APT only)
+#   The filename extention is important here.
+#   Use `.asc` if the key is armored and `.gpg` if it's unarmored  
 class elastic_stack::repo (
-  Boolean           $oss           = false,
-  Boolean           $prerelease    = false,
-  Optional[Integer] $priority      = undef,
-  String            $proxy         = 'absent',
-  Integer           $version       = 7,
-  Optional[String]  $base_repo_url = undef,
+  Boolean            $oss                       = false,
+  Boolean            $prerelease                = false,
+  Optional[Integer]  $priority                  = undef,
+  String             $proxy                     = 'absent',
+  Integer            $version                   = 7,
+  Stdlib::Filesource $gpg_key_source            = 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+  String[1]          $apt_keyring_name          = 'elastic-keyring.asc',
+  Optional[String]  $base_repo_url             = undef,
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
@@ -60,7 +66,6 @@ class elastic_stack::repo (
   }
 
   $base_url = "${_repo_url}/${version_prefix}${version}${version_suffix}/${_repo_path}"
-  $key_source='https://artifacts.elastic.co/GPG-KEY-elasticsearch'
   $description='Elastic package repository.'
 
   case $facts['os']['family'] {
@@ -73,8 +78,8 @@ class elastic_stack::repo (
         release  => 'stable',
         repos    => 'main',
         key      => {
-          'name'   => 'elastic.asc',
-          'source' => $key_source,
+          'name'   => $apt_keyring_name,
+          'source' => $gpg_key_source,
         },
         pin      => $priority,
       }
@@ -84,7 +89,7 @@ class elastic_stack::repo (
         descr    => $description,
         baseurl  => $base_url,
         gpgcheck => 1,
-        gpgkey   => $key_source,
+        gpgkey   => $gpg_key_source,
         enabled  => 1,
         proxy    => $proxy,
         priority => $priority,
@@ -100,10 +105,10 @@ class elastic_stack::repo (
     'Suse': {
       # Older versions of SLES do not ship with rpmkeys
       if $facts['os']['name'] == 'SLES' and versioncmp($facts['os']['release']['major'], '11') <= 0 {
-        $_import_cmd = "rpm --import ${key_source}"
+        $_import_cmd = "rpm --import ${gpg_key_source}"
       }
       else {
-        $_import_cmd = "rpmkeys --import ${key_source}"
+        $_import_cmd = "rpmkeys --import ${gpg_key_source}"
       }
 
       exec { 'elastic_suse_import_gpg':
@@ -120,7 +125,7 @@ class elastic_stack::repo (
         autorefresh => 1,
         name        => 'elastic',
         gpgcheck    => 1,
-        gpgkey      => $key_source,
+        gpgkey      => $gpg_key_source,
         type        => 'yum',
         priority    => $priority,
       }
