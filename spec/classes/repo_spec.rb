@@ -38,8 +38,10 @@ describe 'elastic_stack::repo', type: 'class' do
       case facts[:os]['family']
       when 'Debian'
         it { is_expected.to declare_apt }
+        it { is_expected.to contain_apt__keyring('elastic-keyring.asc') }
       when 'RedHat'
         it { is_expected.to declare_yum }
+        it { is_expected.to contain_exec('elastic_yumrepo_yum_clean') }
       when 'Suse'
         it { is_expected.to declare_zypper }
         it { is_expected.to contain_exec('elastic_suse_import_gpg').with(command: rpm_key_cmd) }
