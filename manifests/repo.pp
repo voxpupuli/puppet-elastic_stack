@@ -14,16 +14,18 @@
 # @param gpg_key_source The gpg key for the repo
 # @param apt_keyring_name The keyring filename to create (APT only)
 #   The filename extention is important here.
-#   Use `.asc` if the key is armored and `.gpg` if it's unarmored  
+#   Use `.asc` if the key is armored and `.gpg` if it's unarmored
+# @param gpg_key_path The path where the GPG key should be stored (APT only)
 class elastic_stack::repo (
-  Boolean            $oss                       = false,
-  Boolean            $prerelease                = false,
-  Optional[Integer]  $priority                  = undef,
-  String             $proxy                     = 'absent',
-  Integer            $version                   = 7,
-  Stdlib::Filesource $gpg_key_source            = 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-  String[1]          $apt_keyring_name          = 'elastic-keyring.asc',
-  Optional[String]  $base_repo_url             = undef,
+  Boolean              $oss                       = false,
+  Boolean              $prerelease                = false,
+  Optional[Integer]    $priority                  = undef,
+  String               $proxy                     = 'absent',
+  Integer              $version                   = 7,
+  Stdlib::Filesource   $gpg_key_source            = 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+  String[1]            $apt_keyring_name          = 'elastic-keyring.asc',
+  Stdlib::Absolutepath $gpg_key_path              = '/usr/share/keyrings',
+  Optional[String]     $base_repo_url             = undef,
 ) {
   if $prerelease {
     $version_suffix = '.x-prerelease'
@@ -72,16 +74,20 @@ class elastic_stack::repo (
     'Debian': {
       include apt
 
+      apt::keyring { $apt_keyring_name:
+        ensure => present,
+        source => $gpg_key_source,
+        dir    => $gpg_key_path,
+      }
+
       apt::source { 'elastic':
         comment  => $description,
         location => $base_url,
         release  => 'stable',
         repos    => 'main',
-        key      => {
-          'name'   => $apt_keyring_name,
-          'source' => $gpg_key_source,
-        },
         pin      => $priority,
+        keyring  => "${gpg_key_path}/${apt_keyring_name}",
+        require  => Apt::Keyring[$apt_keyring_name],
       }
     }
     'RedHat', 'Linux': {
