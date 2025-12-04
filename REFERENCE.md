@@ -34,6 +34,7 @@ The following parameters are available in the `elastic_stack::repo` class:
 * [`base_repo_url`](#-elastic_stack--repo--base_repo_url)
 * [`gpg_key_source`](#-elastic_stack--repo--gpg_key_source)
 * [`apt_keyring_name`](#-elastic_stack--repo--apt_keyring_name)
+* [`apt_keyring_dir`](#-elastic_stack--repo--apt_keyring_dir)
 
 ##### <a name="-elastic_stack--repo--oss"></a>`oss`
 
@@ -100,4 +101,12 @@ The filename extention is important here.
 Use `.asc` if the key is armored and `.gpg` if it's unarmored
 
 Default value: `'elastic-keyring.asc'`
+
+##### <a name="-elastic_stack--repo--apt_keyring_dir"></a>`apt_keyring_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+The path where the GPG key should be stored (APT only)
+
+Default value: `'/etc/apt/keyrings'`
 
