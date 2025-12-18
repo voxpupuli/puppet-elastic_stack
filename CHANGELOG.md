@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v11.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.0.0) (2025-12-18)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v10.0.0...v11.0.0)
+
+**Breaking changes:**
+
+- drop eol sles-12 [\#104](https://github.com/voxpupuli/puppet-elastic_stack/pull/104) ([marcusdots](https://github.com/marcusdots))
+- Drop puppet, update openvox minimum version to 8.19 [\#97](https://github.com/voxpupuli/puppet-elastic_stack/pull/97) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- add el-10 support [\#106](https://github.com/voxpupuli/puppet-elastic_stack/pull/106) ([marcusdots](https://github.com/marcusdots))
+- add debian-13 support [\#105](https://github.com/voxpupuli/puppet-elastic_stack/pull/105) ([marcusdots](https://github.com/marcusdots))
+- allow puppetlabs/apt 11.x [\#103](https://github.com/voxpupuli/puppet-elastic_stack/pull/103) ([marcusdots](https://github.com/marcusdots))
+- manage gpg key with apt::keyring [\#96](https://github.com/voxpupuli/puppet-elastic_stack/pull/96) ([techsk8](https://github.com/techsk8))
+
+**Closed issues:**
+
+- Ubuntu 20 \(debian\): elastic\_stack::repo is not passing a key ID to apt::source [\#101](https://github.com/voxpupuli/puppet-elastic_stack/issues/101)
+
 ## [v10.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v10.0.0) (2025-06-17)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v9.0.0...v10.0.0)
