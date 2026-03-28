@@ -5,7 +5,7 @@ require 'spec_helper'
 def url(format, version)
   case version
   when %r{^2}
-    repo_type = format == 'yum' ? 'centos' : 'debian'
+    repo_type = (format == 'yum') ? 'centos' : 'debian'
     "https://packages.elastic.co/elasticsearch/#{version}/#{repo_type}"
   else
     "https://artifacts.elastic.co/packages/#{version}/#{format}"
