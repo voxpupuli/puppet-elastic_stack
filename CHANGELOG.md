@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v11.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.0.0) (2025-12-18)
+## [v11.1.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.1.0) (2026-05-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v11.0.0...v11.1.0)
+
+**Implemented enhancements:**
+
+- puppet/yum: Allow 8.x [\#112](https://github.com/voxpupuli/puppet-elastic_stack/pull/112) ([bastelfreak](https://github.com/bastelfreak))
+
+## [v11.0.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.0.0) (2025-12-19)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v10.0.0...v11.0.0)
 
