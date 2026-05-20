@@ -18,7 +18,7 @@
     },
     {
       "name": "puppet/yum",
-      "version_requirement": ">= 0.9.6 < 8.0.0"
+      "version_requirement": ">= 0.9.6 < 9.0.0"
     }
   ],
   "operatingsystem_support": [
