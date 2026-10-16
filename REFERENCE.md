@@ -16,7 +16,7 @@ elastic_stack::repo
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include elastic_stack::repo
@@ -109,4 +109,3 @@ Data type: `Stdlib::Absolutepath`
 The path where the GPG key should be stored (APT only)
 
 Default value: `'/etc/apt/keyrings'`
-
