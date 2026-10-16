@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v11.2.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.2.0) (2026-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v11.1.0...v11.2.0)
+
+**Implemented enhancements:**
+
+- puppetlabs/stdlib: Allow 10.x [\#116](https://github.com/voxpupuli/puppet-elastic_stack/pull/116) ([bastelfreak](https://github.com/bastelfreak))
+- Update requirements to allow OpenVox 9 [\#115](https://github.com/voxpupuli/puppet-elastic_stack/pull/115) ([sebastianrakel](https://github.com/sebastianrakel))
+
 ## [v11.1.0](https://github.com/voxpupuli/puppet-elastic_stack/tree/v11.1.0) (2026-05-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/v11.0.0...v11.1.0)
@@ -114,10 +123,6 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/6.3.2...7.0.0)
 
-**Merged pull requests:**
-
-- Default to Elastic Stack version 7 [\#26](https://github.com/voxpupuli/puppet-elastic_stack/pull/26) ([ghost](https://github.com/ghost))
-
 ## [6.3.2](https://github.com/voxpupuli/puppet-elastic_stack/tree/6.3.2) (2019-08-13)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-elastic_stack/compare/6.3.1...6.3.2)
@@ -128,8 +133,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 6.3.2 [\#31](https://github.com/voxpupuli/puppet-elastic_stack/pull/31) ([ghost](https://github.com/ghost))
-- Do not pass facterversion to on\_supported\_os [\#30](https://github.com/voxpupuli/puppet-elastic_stack/pull/30) ([ghost](https://github.com/ghost))
 - Update metadata versions [\#28](https://github.com/voxpupuli/puppet-elastic_stack/pull/28) ([pillarsdotnet](https://github.com/pillarsdotnet))
 
 ## [6.3.1](https://github.com/voxpupuli/puppet-elastic_stack/tree/6.3.1) (2019-04-17)
@@ -139,10 +142,6 @@ These should not affect the functionality of the module.
 **Closed issues:**
 
 - Current release tarball 6.2.4 erroneously contains local `.git` directory [\#24](https://github.com/voxpupuli/puppet-elastic_stack/issues/24)
-
-**Merged pull requests:**
-
-- Support Puppet 6 [\#25](https://github.com/voxpupuli/puppet-elastic_stack/pull/25) ([ghost](https://github.com/ghost))
 
 ## [6.2.4](https://github.com/voxpupuli/puppet-elastic_stack/tree/6.2.4) (2018-09-16)
 
